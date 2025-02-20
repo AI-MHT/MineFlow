@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import Modal from './components/Modal';
 import { Document, DocumentItem, TreeItem } from './types';
 import './index.css';
+import './styles.css';
 import ImageComponent from './components/ImageComponent'; // Importer le ImageComponent
 
 function generateId() {
@@ -69,10 +70,8 @@ function deleteDocument(docs: DocumentItem[], id: string): DocumentItem[] {
 function findDocumentById(docs: DocumentItem[], id: string): DocumentItem | null {
   for (const doc of docs) {
     if (doc.id === id) return doc;
-    for (const child of doc.children) {
-      const found = findDocumentById(child.children, id);
-      if (found) return found;
-    }
+    const found = findDocumentById(doc.children, id);
+    if (found) return found;
   }
   return null;
 }
@@ -84,11 +83,11 @@ function buildTree(items: DocumentItem[]): TreeItem[] {
     children: doc.children.map(child => ({
       id: child.id,
       label: child.title,
-      children: getDocumentDepth(child) < 2 ? child.children.map(subChild => ({
+      children: child.children.map(subChild => ({
         id: subChild.id,
         label: subChild.title,
-        children: []
-      })) : []
+        children: [] // S'assurer que le niveau 3 ne pose pas de problème
+      }))
     }))
   }));
 }
@@ -137,19 +136,21 @@ function App() {
     ? findDocumentById(document.documents, selectedDocumentId)
     : null;
 
-  const getDocumentForm = (document: DocumentItem) => {
-    const depth = getDocumentDepth(document);
-    switch (depth) {
-      case 0:
-        return <DocumentFormLevel1 document={document} onUpdate={(updatedDoc) => handleUpdateDocument(updatedDoc)} />;
-      case 1:
-        return <DocumentFormLevel2 document={document} onUpdate={(updatedDoc) => handleUpdateDocument(updatedDoc)} />;
-      case 2:
-        return <DocumentFormLevel3 document={document} onUpdate={(updatedDoc) => handleUpdateDocument(updatedDoc)} />;
-      default:
-        return null;
-    }
-  };
+    const getDocumentForm = (document: DocumentItem) => {
+      const depth = getDocumentDepth(document);
+      console.log(`Document Depth: ${depth}, Document Title: ${document.title}`);
+    
+      switch (depth) {
+        case 0:
+          return <DocumentFormLevel1 document={document} onUpdate={(updatedDoc) => handleUpdateDocument(updatedDoc)} />;
+        case 1:
+          return <DocumentFormLevel2 document={document} onUpdate={(updatedDoc) => handleUpdateDocument(updatedDoc)} />;
+        case 2:
+          return <DocumentFormLevel3 document={document} onUpdate={(updatedDoc) => handleUpdateDocument(updatedDoc)} />;
+        default:
+          return <p className="text-gray-500">Invalid document level</p>;
+      }
+    };
 
   const handleUpdateDocument = (updatedDoc: Partial<DocumentItem>) => {
     setDocument(prev => {
@@ -183,7 +184,7 @@ function App() {
         onHideSidebar={() => setIsSidebarVisible(false)}
         onShowSidebar={() => setIsSidebarVisible(true)}
       />
-      <div className={`flex-1 overflow-hidden ${isSidebarVisible ? 'ml-72' : 'ml-0'} transition-all duration-300`}>
+      <div className={`flex-1 overflow-hidden ${isSidebarVisible ? 'ml-100' : 'ml-0'} transition-all duration-300`}>
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-bold text-gray-800">Document Editor</h1>

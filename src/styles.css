@@ -1,0 +1,119 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main Layout */
+.flex {
+  display: flex;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-lg {
+  border-radius: 10px;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+/* Document Editor */
+.text-4xl {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1e40af;
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.lg\:grid-cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+/* Empty State */
+.bg-gray-50 {
+  background-color: #f9fafb;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+  color: #6b7280;
+}
+
+/* Button Styles */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.bg-blue-600 {
+  background-color: #2563eb;
+}
+
+.bg-blue-700:hover {
+  background-color: #1d4ed8;
+}
+
+.bg-red-600 {
+  background-color: #dc2626;
+}
+
+.bg-red-700:hover {
+  background-color: #b91c1c;
+}
+
+.bg-gray-300 {
+  background-color: #d1d5db;
+}
+
+.bg-gray-400:hover {
+  background-color: #9ca3af;
+}
+
+/* Sidebar & Navigation */
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
