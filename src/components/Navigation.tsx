@@ -25,7 +25,6 @@ const NavigationItem: React.FC<{
   const [isOpen, setIsOpen] = useState(true);
   const hasChildren = item.children && item.children.length > 0;
   const isLevel3 = level >= 2; // Level 3 is when level is 2 or more (0-based index)
-
   return (
     <div className="select-none">
       <div
@@ -44,7 +43,6 @@ const NavigationItem: React.FC<{
         >
           {hasChildren && (isOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />)}
         </button>
-
         <div className="flex-1 flex items-center gap-2 ml-1 overflow-hidden">
           {item.icon ? (
             <span className="text-lg">{item.icon}</span>
@@ -115,23 +113,29 @@ const Navigation: React.FC<NavigationProps> = ({
         <>
           <div className="p-4 border-b">
             <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold">General</h2>
+              <button
+                onClick={onHideSidebar}
+                className="p-1 hover:bg-gray-100 rounded"
+                title="Hide Sidebar"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <NavigationItem
+              item={{ id: 'home', label: 'Home Page'}}
+            />
+          </div>
+          <div className="p-4 border-b">
+            <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">Documents</h2>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => onAddDocument(null)}
-                  className="p-1 hover:bg-gray-100 rounded"
-                  title="Add Document"
-                >
-                  <Plus size={20} />
-                </button>
-                <button
-                  onClick={onHideSidebar}
-                  className="p-1 hover:bg-gray-100 rounded"
-                  title="Hide Sidebar"
-                >
-                  <X size={20} />
-                </button>
-              </div>
+              <button
+                onClick={() => onAddDocument(null)}
+                className="p-1 hover:bg-gray-100 rounded"
+                title="Add Document"
+              >
+                <Plus size={20} />
+              </button>
             </div>
           </div>
           <div className="py-2">
