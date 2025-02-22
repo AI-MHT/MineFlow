@@ -8,7 +8,7 @@ import Navigation from './Navigation';
 import Modal from './Modal';
 import { Document, DocumentItem, TreeItem } from '../types';
 import '../index.css';
-import '../styles.css';
+import './styles.css';
 import ImageComponent from './ImageComponent';
 
 function generateId(): string {
